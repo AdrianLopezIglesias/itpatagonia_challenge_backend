@@ -95,6 +95,7 @@ const subject = Object(rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__["webSocket"])
     url: "ws://localhost:"+process.env.PORT,
     deserializer: data => data
 });
+		console.log(process.env.PORT)
 class WeatherWidgetComponent {
     constructor() {
         this.weather = {
