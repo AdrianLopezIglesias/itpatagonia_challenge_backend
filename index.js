@@ -28,20 +28,20 @@ wsServer.on('connection', (socket) => {
 	socket.on('message', (message) => {
 		let m = JSON.parse(message)
 		console.log("Receiving a call")
-		socket.send(process.env.PORT)
-		// axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${openweather_key}&units=metric `).then(x => {
-		// 	socket.send(JSON.stringify(x.data))
-		// });
+		console.log(process.env.PORT)
+		axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${openweather_key}&units=metric `).then(x => {
+			socket.send(JSON.stringify(x.data))
+		});
 
-		// setInterval(function () {
-		// 	axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${openweather_key}&units=metric`).then(x => {
-		// 		socket.send(JSON.stringify(x.data))
-		// 		console.log(x.data)
-		// 	});
-		// }, 10000);
-		// setTimeout(() => {
-		// 	socket.close()
-		// }, 100000)
+		setInterval(function () {
+			axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${openweather_key}&units=metric`).then(x => {
+				socket.send(JSON.stringify(x.data))
+				console.log(x.data)
+			});
+		}, 10000);
+		setTimeout(() => {
+			socket.close()
+		}, 100000)
 	});
 
 });
