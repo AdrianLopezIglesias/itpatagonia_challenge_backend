@@ -1,17 +1,17 @@
-# URLs
-## Usuario
-get('/): Vista de Pokedex
+# IT Patagonia Challenge Weather Widget
+## Uso
+npm i 
 
-get('/pokemon): Vista de Pokedex
+get('/') devuelve la vista con los datos ya parseada en Angular
 
-get('/pokemon/{id}): Vista de detalles de Pokemon
+## Conceptos generales
 
-## Desarrollador
-get('/api-docs): Documentación de API en Swagger
+Los datos son obtenidos de http://api.openweathermap.org/
 
-get('/api/pokemon?offset={int}&limit={int}): Index de Pokedex. Paginación por Offeset & Limit
+Como no encontré un WebSocket disponible de clima construí el mío propio. Básicamente una vez que el Front genera el vínculo de WS con el Servidor, este último consulta constantemente a la API y le devuelve el resultado al Front. 
 
-get('/api/pokemon/{id}): Vista de detalles de Pokemon
+Existe un limite de request por hora en la versión gratis de la API, por lo que una vez consumidos la API no respondería. 
 
+## FrontEnd
+El repositorio del desarrollo en Angular se puede encontrar en : (http://completar)
 
-# Deploying
