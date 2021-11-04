@@ -13,5 +13,5 @@ Como no encontré un WebSocket disponible de clima construí el mío propio. Bá
 Existe un limite de request por hora en la versión gratis de la API, por lo que una vez consumidos la API no respondería. 
 
 ## FrontEnd
-El repositorio del desarrollo en Angular se puede encontrar en : (http://completar)
+El repositorio del desarrollo en Angular se puede encontrar en : https://github.com/AdrianLopezIglesias/itpatagonia_challenge_frontend
 
