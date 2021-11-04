@@ -94,7 +94,7 @@ console.log(url)
 
 console.log(document.getElementById('port').innerText)
 const subject = Object(rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__["webSocket"])({
-    url: "wss://"+ url +":"+document.getElementById('port').innerText,
+    url: "wss://"+ url,
     deserializer: data => data
 });
 class WeatherWidgetComponent {
