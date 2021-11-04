@@ -88,7 +88,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WeatherWidgetComponent", function() { return WeatherWidgetComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/webSocket */ "3uOa");
-
+let url = window.location.href
+console.log(url)
 
 console.log(document.getElementById('port').innerText)
 const subject = Object(rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__["webSocket"])({
