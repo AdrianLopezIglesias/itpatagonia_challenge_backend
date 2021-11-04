@@ -90,12 +90,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/webSocket */ "3uOa");
 
 
-
+console.log(document.getElementById('port').innerText)
 const subject = Object(rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__["webSocket"])({
-    url: "ws://localhost:<%= port %>",
+    url: "ws://localhost:"+document.getElementById('port').innerText,
     deserializer: data => data
 });
-		console.log(process.env.PORT)
 class WeatherWidgetComponent {
     constructor() {
         this.weather = {
