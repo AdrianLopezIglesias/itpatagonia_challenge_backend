@@ -51,7 +51,7 @@ server.listen(port, () => {
 
 
 //ROUTES
-app.get('/', (req, res) => res.render('index'))
+app.get('/', (req, res) => res.render('index', {port: port}))
 
 
 
