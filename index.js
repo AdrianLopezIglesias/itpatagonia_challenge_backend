@@ -28,7 +28,7 @@ wsServer.on('connection', (socket) => {
 	socket.on('message', (message) => {
 		let m = JSON.parse(message)
 		console.log("Receiving a call")
-		console.log(process.env.PORT)
+		socket.send(process.env.PORT)
 		axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${city_id}&appid=${openweather_key}&units=metric `).then(x => {
 			socket.send(JSON.stringify(x.data))
 		});
