@@ -92,7 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const subject = Object(rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__["webSocket"])({
-    url: "ws://localhost:"+process.env.PORT,
+    url: "ws://localhost:<%= port %>",
     deserializer: data => data
 });
 		console.log(process.env.PORT)
