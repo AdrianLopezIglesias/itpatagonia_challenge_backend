@@ -145,7 +145,7 @@ class WeatherWidgetComponent {
             }
         };
         this.cities = [];
-        this.static_cities = ['Buenos Aires F.D.', 'Santa Fe', 'San Miguel de Tucumán', 'Río Negro Province', 'Cordova', 'Berlin', 'Miami', 'New York'];
+        this.static_cities = ['Buenos Aires F.D.', 'Santa Fe', 'San Miguel de Tucumán', 'Río Negro Province', 'Córdoba', 'Berlin', 'Miami', 'New York'];
         this.current_city = 'Buenos Aires F.D.';
         this.started = 0;
     }
