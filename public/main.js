@@ -147,6 +147,7 @@ class WeatherWidgetComponent {
         this.cities = [];
         this.static_cities = ['Buenos Aires F.D.', 'Santa Fe', 'San Miguel de Tucumán', 'Río Negro Province', 'Cordova', 'Berlin', 'Miami', 'New York'];
         this.current_city = 'Buenos Aires F.D.';
+        this.started = 0;
     }
     ngOnInit() {
         subject.subscribe((data) => this.setWeather((data.data)), (err) => console.log(err), () => console.log('complete'));
@@ -154,8 +155,10 @@ class WeatherWidgetComponent {
         subject.next(message);
     }
     changeCurrentCity(city) {
+        console.log("changeCurrentCity");
+        this.current_city = city;
         let datax = this.cities.filter(x => {
-            return x.name == city;
+            return x.name == this.current_city;
         });
         let data = datax[0];
         this.weather = {
@@ -189,11 +192,13 @@ class WeatherWidgetComponent {
         return d.toUTCString();
     }
     setWeather(data) {
-        // console.log("🚀 ~ file: weather-widget.component.ts ~ line 108 ~ WeatherWidgetComponent ~ setWeather ~ data", data)
         data = (JSON.parse(data));
         console.log("🚀 ~ file: weather-widget.component.ts ~ line 109 ~ WeatherWidgetComponent ~ setWeather ~ data", data);
         this.cities = (data);
-        this.changeCurrentCity('Buenos Aires F.D.');
+        if (this.started == 0) {
+            this.changeCurrentCity('Buenos Aires F.D.');
+            this.started = 1;
+        }
     }
 }
 WeatherWidgetComponent.ɵfac = function WeatherWidgetComponent_Factory(t) { return new (t || WeatherWidgetComponent)(); };
