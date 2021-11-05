@@ -20,7 +20,7 @@ var cron = require('node-cron');
 
 let openweather_key = "fed594d3bfbd3a0a243f142e71d4ef7a"
 
-ciudades = ["3433955", "1688161", "3836873", "3838830", "2519240"]
+ciudades = ["3433955", "1688161", "3836873", "3838830", "3860259", "2950158", "4164138", "5128638"]
 let city_id = "3433955" // BUENOS AIRES
 let rosario = "1688161"
 let san_miguel_tucuman = "3836873"
