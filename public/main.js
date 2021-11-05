@@ -88,13 +88,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WeatherWidgetComponent", function() { return WeatherWidgetComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/webSocket */ "3uOa");
-let url = window.location.href.replace("https://", "")
-url = url.replace("/", "")
-console.log(url)
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
 
-console.log(document.getElementById('port').innerText)
+
+
+
+function WeatherWidgetComponent_option_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "option", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const city_r1 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", city_r1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", city_r1, " ");
+} }
+let url;
+let env = "FROM_HEROKU"; //SERVER_LOCAL, TO_HEROKU, FROM_HEROKU
+if (env == "FROM_HEROKU") {
+    url = window.location.href.replace("https://", "");
+    url = url.replace("/", "");
+}
+if (env == "SERVER_LOCAL") {
+    url = "localhost:3500";
+}
+if (env == "TO_HEROKU") {
+    url = "wss://damp-basin-32272.herokuapp.com/";
+}
 const subject = Object(rxjs_webSocket__WEBPACK_IMPORTED_MODULE_1__["webSocket"])({
-    url: "wss://"+ url,
+    url: "ws://" + url,
     deserializer: data => data
 });
 class WeatherWidgetComponent {
@@ -116,13 +138,20 @@ class WeatherWidgetComponent {
                 speed: 'Esperando datos del servidor'
             }
         };
+        this.cities = [];
+        this.static_cities = ['Buenos Aires F.D.', 'Santa Fe', 'San Miguel de Tucumán', 'Río Negro Province', 'Cordova'];
+        this.current_city = 'Buenos Aires F.D.';
     }
     ngOnInit() {
-        subject.subscribe((data) => this.setWeather(JSON.parse(data.data)), (err) => console.log(err), () => console.log('complete'));
+        subject.subscribe((data) => this.setWeather((data.data)), (err) => console.log(err), () => console.log('complete'));
         let message = { op: 'Start' };
         subject.next(message);
     }
-    setWeather(data) {
+    changeCurrentCity(city) {
+        let datax = this.cities.filter(x => {
+            return x.name == city;
+        });
+        let data = datax[0];
         this.weather = {
             name: data.name,
             weather: [{ main: data.weather[0].main + " " + data.weather[0].description }],
@@ -140,13 +169,20 @@ class WeatherWidgetComponent {
                 speed: data.wind.speed + " kmh"
             }
         };
-        console.log(data);
+    }
+    setWeather(data) {
+        // console.log("🚀 ~ file: weather-widget.component.ts ~ line 108 ~ WeatherWidgetComponent ~ setWeather ~ data", data)
+        data = (JSON.parse(data));
+        console.log("🚀 ~ file: weather-widget.component.ts ~ line 109 ~ WeatherWidgetComponent ~ setWeather ~ data", data);
+        this.cities = (data);
+        this.changeCurrentCity('Buenos Aires F.D.');
     }
 }
 WeatherWidgetComponent.ɵfac = function WeatherWidgetComponent_Factory(t) { return new (t || WeatherWidgetComponent)(); };
-WeatherWidgetComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: WeatherWidgetComponent, selectors: [["weather-widget"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([])], decls: 22, vars: 11, template: function WeatherWidgetComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+WeatherWidgetComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: WeatherWidgetComponent, selectors: [["weather-widget"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([])], decls: 24, vars: 12, consts: [[3, "change"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"]], template: function WeatherWidgetComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "select", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function WeatherWidgetComponent_Template_select_change_0_listener($event) { return ctx.changeCurrentCity($event.target.value); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, WeatherWidgetComponent_option_1_Template, 2, 2, "option", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
@@ -178,8 +214,13 @@ WeatherWidgetComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "p");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.static_cities);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("El clima en ", ctx.weather.name, "");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.weather.weather[0].main);
@@ -201,12 +242,18 @@ WeatherWidgetComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Viento direcci\u00F3n : ", ctx.weather.wind.deg, "");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Viento velocidad : ", ctx.weather.wind.speed, "");
-    } }, encapsulation: 2 });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"]], encapsulation: 2 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](WeatherWidgetComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
                 selector: 'weather-widget',
                 template: `
+	<select (change)="changeCurrentCity($event.target.value)">
+		<option *ngFor="let city of static_cities" [value]="city">
+			{{city}}
+		</option>
+	</select>
+
 		<p>El clima en 								 {{weather.name}}</p>
 		<p>{{weather.weather[0].main}}</p>
 		<p>Temperatura							 : {{weather.main.temp}}</p>
